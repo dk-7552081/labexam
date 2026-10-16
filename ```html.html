@@ -1,0 +1,1902 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RecipeHub - Food Recipe App</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #ff6347;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        } 
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+
+            height: 450px;
+
+            background:
+            linear-gradient(
+                rgba(0,0,0,0.55),
+                rgba(0,0,0,0.55)
+            ),
+            url("https://images.unsplash.com/photo-1547592180-85f173990554")
+            center/cover;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+
+            display: flex;
+
+            width: 600px;
+            max-width: 90%;
+
+            margin: auto;
+        }
+
+        .search-box input {
+
+            flex: 1;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 8px 0 0 8px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        .search-box button {
+
+            padding: 15px 20px;
+
+            border: none;
+
+            background: #ff6347;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            border-radius: 0 8px 8px 0;
+        }
+
+        .search-box button:hover {
+            background: #e6533c;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .categories {
+
+            background: white;
+
+            text-align: center;
+
+            padding: 40px 7%;
+        }
+
+        .categories h2 {
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+
+            padding: 11px 20px;
+
+            margin: 5px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #ffe5df;
+
+            color: #ff6347;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .category-btn:hover {
+
+            background: #ff6347;
+
+            color: white;
+        }
+
+        /* ================= RECIPES ================= */
+
+        .recipes {
+
+            padding: 50px 7%;
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+
+            font-size: 32px;
+
+            margin-bottom: 10px;
+        }
+
+        .recipe-container {
+
+            display: grid;
+
+            grid-template-columns:
+            repeat(auto-fit, minmax(270px, 1fr));
+
+            gap: 25px;
+        }
+
+        /* ================= RECIPE CARD ================= */
+
+        .recipe-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+            0 5px 15px rgba(0,0,0,0.12);
+
+            transition: 0.3s;
+        }
+
+        .recipe-card:hover {
+
+            transform: translateY(-7px);
+        }
+
+        .recipe-card img {
+
+            width: 100%;
+
+            height: 200px;
+
+            object-fit: cover;
+        }
+
+        .recipe-info {
+
+            padding: 20px;
+        }
+
+        .recipe-info h3 {
+
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+        .cuisine {
+
+            color: #ff6347;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+        .view-btn,
+        .fav-btn {
+
+            flex: 1;
+
+            padding: 10px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+        }
+
+        .view-btn {
+
+            background: #ff6347;
+
+            color: white;
+        }
+
+        .fav-btn {
+
+            background: #ffe5df;
+
+            color: #ff6347;
+        }
+
+        .view-btn:hover {
+
+            background: #e6533c;
+        }
+
+        .fav-btn:hover {
+
+            background: #ff6347;
+
+            color: white;
+        }
+
+        /* ================= FAVORITES ================= */
+
+        .favorites {
+
+            padding: 50px 7%;
+
+            background: #fff3ef;
+        }
+
+        .favorites h2 {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        .empty {
+
+            text-align: center;
+
+            grid-column: 1 / -1;
+
+            padding: 30px;
+
+            font-size: 18px;
+        }
+
+        /* ================= ADD RECIPE ================= */
+
+        .add-recipe {
+
+            background: white;
+
+            padding: 50px 7%;
+
+            text-align: center;
+        }
+
+        .add-recipe h2 {
+
+            margin-bottom: 25px;
+        }
+
+        form {
+
+            max-width: 600px;
+
+            margin: auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        form input,
+        form select,
+        form textarea {
+
+            padding: 13px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        form textarea {
+
+            height: 120px;
+
+            resize: none;
+        }
+
+        form button {
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #ff6347;
+
+            color: white;
+
+            font-size: 17px;
+
+            cursor: pointer;
+        }
+
+        form button:hover {
+
+            background: #e6533c;
+        }
+
+        /* ================= MODAL ================= */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(0,0,0,0.7);
+
+            z-index: 200;
+
+            overflow-y: auto;
+        }
+
+        .modal-content {
+
+            background: white;
+
+            width: 90%;
+
+            max-width: 650px;
+
+            margin: 50px auto;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            position: relative;
+        }
+
+        .modal-content img {
+
+            width: 100%;
+
+            height: 280px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+        }
+
+        .modal-content h2 {
+
+            margin: 20px 0 10px;
+        }
+
+        .modal-content h3 {
+
+            margin-top: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .modal-content li {
+
+            margin: 7px 0;
+
+            margin-left: 20px;
+        }
+
+        .close {
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 10px;
+
+            color: white;
+
+            font-size: 35px;
+
+            cursor: pointer;
+
+            z-index: 10;
+        }
+
+        /* ================= RATING ================= */
+
+        .rating {
+
+            font-size: 35px;
+
+            color: #ccc;
+
+            cursor: pointer;
+
+            letter-spacing: 5px;
+        }
+
+        .rating span:hover {
+
+            color: orange;
+        }
+
+        #ratingMessage {
+
+            margin-top: 10px;
+
+            font-weight: bold;
+
+            color: #ff6347;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            background: #222;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            line-height: 1.8;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:700px) {
+
+            header {
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav {
+
+                text-align: center;
+            }
+
+            nav a {
+
+                margin: 5px;
+
+                font-size: 14px;
+            }
+
+            .hero h1 {
+
+                font-size: 34px;
+            }
+
+            .hero p {
+
+                font-size: 17px;
+            }
+
+            .search-box {
+
+                width: 90%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        🍴 RecipeHub
+    </div>
+
+    <nav>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#recipes">
+            Recipes
+        </a>
+
+        <a href="#favorites">
+            Favorites
+        </a>
+
+        <a href="#add">
+            Add Recipe
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div>
+
+        <h1>
+            Discover Delicious Recipes
+        </h1>
+
+        <p>
+            Find easy and tasty recipes for every occasion
+        </p>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search recipes or ingredients..."
+            >
+
+            <button onclick="searchRecipe()">
+                🔍 Search
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories">
+
+    <h2>
+        🌍 Explore by Cuisine
+    </h2>
+
+    <button
+        class="category-btn"
+        onclick="filterRecipe('All')">
+        🍽 All
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterRecipe('Indian')">
+        🇮🇳 Indian
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterRecipe('Italian')">
+        🇮🇹 Italian
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterRecipe('Chinese')">
+        🥡 Chinese
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterRecipe('Mexican')">
+        🌮 Mexican
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterRecipe('American')">
+        🇺🇸 American
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterRecipe('Middle Eastern')">
+        🧆 Middle Eastern
+    </button>
+
+</section>
+
+
+<!-- ================= RECIPES ================= -->
+
+<section class="recipes" id="recipes">
+
+    <div class="section-title">
+
+        <h2>
+            🍽 Popular Recipes
+        </h2>
+
+        <p>
+            Explore delicious recipes from around the world
+        </p>
+
+    </div>
+
+
+    <div
+        class="recipe-container"
+        id="recipeContainer">
+
+    </div>
+
+</section>
+
+
+<!-- ================= FAVORITES ================= -->
+
+<section
+    class="favorites"
+    id="favorites">
+
+    <h2>
+        ❤️ My Favorite Recipes
+    </h2>
+
+
+    <div
+        class="recipe-container"
+        id="favoriteContainer">
+
+    </div>
+
+</section>
+
+
+<!-- ================= ADD RECIPE ================= -->
+
+<section
+    class="add-recipe"
+    id="add">
+
+    <h2>
+        ➕ Submit Your Recipe
+    </h2>
+
+
+    <form id="recipeForm">
+
+        <input
+            type="text"
+            id="recipeName"
+            placeholder="Recipe Name"
+            required
+        >
+
+
+        <input
+            type="text"
+            id="recipeImage"
+            placeholder="Image URL"
+            required
+        >
+
+
+        <select
+            id="recipeCuisine"
+            required>
+
+            <option value="">
+                Select Cuisine
+            </option>
+
+            <option value="Indian">
+                Indian
+            </option>
+
+            <option value="Italian">
+                Italian
+            </option>
+
+            <option value="Chinese">
+                Chinese
+            </option>
+
+            <option value="Mexican">
+                Mexican
+            </option>
+
+            <option value="American">
+                American
+            </option>
+
+            <option value="Middle Eastern">
+                Middle Eastern
+            </option>
+
+        </select>
+
+
+        <input
+            type="text"
+            id="ingredients"
+            placeholder="Ingredients separated by comma"
+            required
+        >
+
+
+        <textarea
+            id="instructions"
+            placeholder="Enter step-by-step instructions"
+            required>
+        </textarea>
+
+
+        <button type="submit">
+            ➕ Add Recipe
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 RecipeHub - Food Recipe App
+    </p>
+
+    <p>
+        Made with ❤️ using HTML, CSS & JavaScript
+    </p>
+
+</footer>
+
+
+<!-- ================= RECIPE MODAL ================= -->
+
+<div
+    class="modal"
+    id="recipeModal">
+
+    <div class="modal-content">
+
+
+        <span
+            class="close"
+            onclick="closeModal()">
+            &times;
+        </span>
+
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Recipe">
+
+
+        <h2
+            id="modalTitle">
+        </h2>
+
+
+        <p
+            id="modalCuisine">
+        </p>
+
+
+        <h3>
+            🥕 Ingredients
+        </h3>
+
+
+        <ul
+            id="modalIngredients">
+        </ul>
+
+
+        <h3>
+            👨‍🍳 Preparation Steps
+        </h3>
+
+
+        <p
+            id="modalInstructions">
+        </p>
+
+
+        <h3>
+            ⭐ Rate this Recipe
+        </h3>
+
+
+        <div class="rating">
+
+            <span onclick="rate(1)">
+                ★
+            </span>
+
+            <span onclick="rate(2)">
+                ★
+            </span>
+
+            <span onclick="rate(3)">
+                ★
+            </span>
+
+            <span onclick="rate(4)">
+                ★
+            </span>
+
+            <span onclick="rate(5)">
+                ★
+            </span>
+
+        </div>
+
+
+        <p id="ratingMessage"></p>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/* ================= RECIPE DATA ================= */
+
+let recipes = [
+
+    {
+        id: 1,
+        name: "Chicken Biryani",
+        cuisine: "Indian",
+        image:
+        "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-biryani-awadhi-01.jpg",
+
+        ingredients: [
+            "Chicken",
+            "Basmati Rice",
+            "Onion",
+            "Tomato",
+            "Yogurt",
+            "Biryani Masala"
+        ],
+
+        instructions:
+        "1. Marinate chicken with spices and yogurt. " +
+        "2. Cook onions and tomatoes. " +
+        "3. Add chicken and cook well. " +
+        "4. Add rice and water. " +
+        "5. Cover and cook until ready."
+    },
+
+
+    {
+        id: 2,
+        name: "Margherita Pizza",
+        cuisine: "Italian",
+        image:
+        "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
+
+        ingredients: [
+            "Pizza Dough",
+            "Tomato Sauce",
+            "Mozzarella Cheese",
+            "Basil",
+            "Olive Oil"
+        ],
+
+        instructions:
+        "1. Prepare pizza dough. " +
+        "2. Spread tomato sauce. " +
+        "3. Add mozzarella cheese. " +
+        "4. Add basil leaves. " +
+        "5. Bake until golden."
+    },
+
+
+    {
+        id: 3,
+        name: "Chinese Fried Rice",
+        cuisine: "Chinese",
+        image:
+        "https://images.unsplash.com/photo-1603133872878-684f208fb84b",
+
+        ingredients: [
+            "Rice",
+            "Carrot",
+            "Capsicum",
+            "Spring Onion",
+            "Soy Sauce",
+            "Pepper"
+        ],
+
+        instructions:
+        "1. Heat oil in a pan. " +
+        "2. Add vegetables. " +
+        "3. Add cooked rice. " +
+        "4. Add soy sauce and pepper. " +
+        "5. Mix well and serve."
+    },
+
+
+    {
+        id: 4,
+        name: "Mexican Tacos",
+        cuisine: "Mexican",
+        image:
+        "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b",
+
+        ingredients: [
+            "Taco Shells",
+            "Beans",
+            "Lettuce",
+            "Tomato",
+            "Cheese",
+            "Salsa"
+        ],
+
+        instructions:
+        "1. Prepare taco filling. " +
+        "2. Heat taco shells. " +
+        "3. Add beans and vegetables. " +
+        "4. Add cheese and salsa. " +
+        "5. Serve hot."
+    },
+
+
+    {
+        id: 5,
+        name: "Masala Dosa",
+        cuisine: "Indian",
+        image:
+        "https://images.unsplash.com/photo-1668236543090-82eba5ee5976",
+
+        ingredients: [
+            "Dosa Batter",
+            "Potatoes",
+            "Onion",
+            "Green Chilli",
+            "Curry Leaves"
+        ],
+
+        instructions:
+        "1. Prepare potato masala. " +
+        "2. Heat dosa pan. " +
+        "3. Spread dosa batter. " +
+        "4. Add potato masala. " +
+        "5. Fold and serve."
+    },
+
+
+    {
+        id: 6,
+        name: "Italian Pasta",
+        cuisine: "Italian",
+        image:
+        "https://images.unsplash.com/photo-1473093295043-cdd812d0e601",
+
+        ingredients: [
+            "Pasta",
+            "Tomato Sauce",
+            "Garlic",
+            "Onion",
+            "Cheese",
+            "Italian Herbs"
+        ],
+
+        instructions:
+        "1. Boil pasta. " +
+        "2. Cook garlic and onion. " +
+        "3. Add tomato sauce. " +
+        "4. Add pasta. " +
+        "5. Add cheese and herbs."
+    },
+
+
+    {
+        id: 7,
+        name: "Butter Chicken",
+        cuisine: "Indian",
+        image:
+        "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398",
+
+        ingredients: [
+            "Chicken",
+            "Butter",
+            "Tomato",
+            "Cream",
+            "Garam Masala",
+            "Ginger Garlic Paste"
+        ],
+
+        instructions:
+        "1. Cook chicken with spices. " +
+        "2. Prepare tomato gravy. " +
+        "3. Add butter and cream. " +
+        "4. Add cooked chicken. " +
+        "5. Simmer and serve."
+    },
+
+
+    {
+        id: 8,
+        name: "Paneer Tikka",
+        cuisine: "Indian",
+        image:
+        "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8",
+
+        ingredients: [
+            "Paneer",
+            "Yogurt",
+            "Capsicum",
+            "Onion",
+            "Tikka Masala"
+        ],
+
+        instructions:
+        "1. Cut paneer and vegetables. " +
+        "2. Mix with yogurt and spices. " +
+        "3. Marinate for some time. " +
+        "4. Grill until lightly browned. " +
+        "5. Serve hot."
+    },
+
+
+    {
+        id: 9,
+        name: "Chicken Noodles",
+        cuisine: "Chinese",
+        image:
+        "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841",
+
+        ingredients: [
+            "Noodles",
+            "Chicken",
+            "Carrot",
+            "Capsicum",
+            "Soy Sauce",
+            "Spring Onion"
+        ],
+
+        instructions:
+        "1. Boil noodles. " +
+        "2. Cook chicken. " +
+        "3. Add vegetables. " +
+        "4. Add noodles and soy sauce. " +
+        "5. Mix well and serve."
+    },
+
+
+    {
+        id: 10,
+        name: "Cheese Burger",
+        cuisine: "American",
+        image:
+        "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+
+        ingredients: [
+            "Burger Bun",
+            "Veg Patty",
+            "Cheese",
+            "Lettuce",
+            "Tomato",
+            "Mayonnaise"
+        ],
+
+        instructions:
+        "1. Toast burger buns. " +
+        "2. Cook the patty. " +
+        "3. Add cheese. " +
+        "4. Add lettuce and tomato. " +
+        "5. Assemble the burger."
+    },
+
+
+    {
+        id: 11,
+        name: "Pancakes",
+        cuisine: "American",
+        image:
+        "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
+
+        ingredients: [
+            "Flour",
+            "Milk",
+            "Eggs",
+            "Sugar",
+            "Butter",
+            "Honey"
+        ],
+
+        instructions:
+        "1. Mix flour, milk and eggs. " +
+        "2. Add sugar. " +
+        "3. Heat a pan. " +
+        "4. Pour the batter. " +
+        "5. Cook both sides and serve."
+    },
+
+
+    {
+        id: 12,
+        name: "Mango Smoothie",
+        cuisine: "Indian",
+        image:
+        "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4",
+
+        ingredients: [
+            "Mango",
+            "Milk",
+            "Sugar",
+            "Ice Cubes"
+        ],
+
+        instructions:
+        "1. Peel and cut mango. " +
+        "2. Add mango to blender. " +
+        "3. Add milk and sugar. " +
+        "4. Blend until smooth. " +
+        "5. Serve chilled."
+    },
+
+
+    {
+        id: 13,
+        name: "Veg Manchurian",
+        cuisine: "Chinese",
+        image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_SJHC8WYj30-35KOMzAm-KFduZM-F6YzD6Iv1l2EksSdbusbwMz6jYM6V&s=10",
+
+        ingredients: [
+            "Cabbage",
+            "Carrot",
+            "Corn Flour",
+            "Soy Sauce",
+            "Garlic",
+            "Spring Onion"
+        ],
+
+        instructions:
+        "1. Mix vegetables and make balls. " +
+        "2. Cook the vegetable balls. " +
+        "3. Prepare Manchurian sauce. " +
+        "4. Add balls to sauce. " +
+        "5. Cook and serve."
+    },
+
+
+    {
+        id: 14,
+        name: "Chocolate Cake",
+        cuisine: "American",
+        image:
+        "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
+
+        ingredients: [
+            "Flour",
+            "Cocoa Powder",
+            "Sugar",
+            "Milk",
+            "Butter",
+            "Baking Powder"
+        ],
+
+        instructions:
+        "1. Mix flour and cocoa powder. " +
+        "2. Add sugar and milk. " +
+        "3. Add butter and baking powder. " +
+        "4. Pour into cake pan. " +
+        "5. Bake until cooked."
+    },
+
+
+    {
+        id: 15,
+        name: "French Fries",
+        cuisine: "American",
+        image:
+        "https://images.unsplash.com/photo-1573080496219-bb080dd4f877",
+
+        ingredients: [
+            "Potatoes",
+            "Salt",
+            "Oil",
+            "Pepper"
+        ],
+
+        instructions:
+        "1. Cut potatoes into strips. " +
+        "2. Wash and dry them. " +
+        "3. Heat oil. " +
+        "4. Cook until golden. " +
+        "5. Add salt and pepper."
+    },
+
+
+    {
+        id: 16,
+        name: "Guacamole Tacos",
+        cuisine: "Mexican",
+        image:
+        "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85",
+
+        ingredients: [
+            "Taco Shells",
+            "Avocado",
+            "Tomato",
+            "Onion",
+            "Lime",
+            "Coriander"
+        ],
+
+        instructions:
+        "1. Mash avocado. " +
+        "2. Add tomato and onion. " +
+        "3. Add lime juice. " +
+        "4. Mix well. " +
+        "5. Fill taco shells and serve."
+    },
+
+
+    {
+        id: 17,
+        name: "Vegetable Pizza",
+        cuisine: "Italian",
+        image:
+        "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+
+        ingredients: [
+            "Pizza Dough",
+            "Tomato Sauce",
+            "Capsicum",
+            "Onion",
+            "Olives",
+            "Cheese"
+        ],
+
+        instructions:
+        "1. Prepare pizza dough. " +
+        "2. Spread tomato sauce. " +
+        "3. Add vegetables. " +
+        "4. Add cheese. " +
+        "5. Bake until golden."
+    },
+
+
+    {
+        id: 18,
+        name: "Chicken Shawarma",
+        cuisine: "Middle Eastern",
+        image:
+        "https://images.unsplash.com/photo-1529006557810-274b9b2fc783",
+
+        ingredients: [
+            "Chicken",
+            "Pita Bread",
+            "Lettuce",
+            "Tomato",
+            "Garlic Sauce",
+            "Spices"
+        ],
+
+        instructions:
+        "1. Season chicken with spices. " +
+        "2. Cook the chicken thoroughly. " +
+        "3. Slice the chicken. " +
+        "4. Add chicken and vegetables to pita bread. " +
+        "5. Add sauce and roll."
+    }
+
+];
+
+
+/* ================= DISPLAY RECIPES ================= */
+
+function displayRecipes(list = recipes) {
+
+    let container =
+        document.getElementById("recipeContainer");
+
+    container.innerHTML = "";
+
+
+    if (list.length === 0) {
+
+        container.innerHTML =
+        `<p class="empty">
+            😔 No recipes found
+        </p>`;
+
+        return;
+    }
+
+
+    list.forEach(recipe => {
+
+        let card =
+            document.createElement("div");
+
+        card.className = "recipe-card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${recipe.image}"
+                alt="${recipe.name}"
+            >
+
+            <div class="recipe-info">
+
+                <h3>
+                    ${recipe.name}
+                </h3>
+
+                <p class="cuisine">
+                    ${recipe.cuisine}
+                </p>
+
+                <div class="buttons">
+
+                    <button
+                        class="view-btn"
+                        onclick="openRecipe(${recipe.id})">
+
+                        📖 View Recipe
+
+                    </button>
+
+
+                    <button
+                        class="fav-btn"
+                        onclick="toggleFavorite(${recipe.id})">
+
+                        ❤️ Save
+
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchRecipe() {
+
+    let text =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    let result =
+        recipes.filter(recipe => {
+
+            return (
+
+                recipe.name
+                .toLowerCase()
+                .includes(text)
+
+                ||
+
+                recipe.cuisine
+                .toLowerCase()
+                .includes(text)
+
+                ||
+
+                recipe.ingredients.some(
+                    item =>
+                    item
+                    .toLowerCase()
+                    .includes(text)
+                )
+
+            );
+
+        });
+
+
+    displayRecipes(result);
+
+}
+
+
+/* SEARCH WHILE TYPING */
+
+document
+.getElementById("search")
+.addEventListener(
+    "input",
+    searchRecipe
+);
+
+
+/* ================= FILTER ================= */
+
+function filterRecipe(cuisine) {
+
+    if (cuisine === "All") {
+
+        displayRecipes();
+
+    } else {
+
+        let result =
+            recipes.filter(
+                recipe =>
+                recipe.cuisine === cuisine
+            );
+
+        displayRecipes(result);
+    }
+
+}
+
+
+/* ================= MODAL ================= */
+
+let selectedRecipe = null;
+
+
+function openRecipe(id) {
+
+    selectedRecipe =
+        recipes.find(
+            recipe =>
+            recipe.id === id
+        );
+
+
+    document
+    .getElementById("modalImage")
+    .src =
+        selectedRecipe.image;
+
+
+    document
+    .getElementById("modalTitle")
+    .textContent =
+        selectedRecipe.name;
+
+
+    document
+    .getElementById("modalCuisine")
+    .textContent =
+        "Cuisine: " +
+        selectedRecipe.cuisine;
+
+
+    let ingredientList =
+        document
+        .getElementById(
+            "modalIngredients"
+        );
+
+
+    ingredientList.innerHTML = "";
+
+
+    selectedRecipe.ingredients
+    .forEach(item => {
+
+        let li =
+            document.createElement("li");
+
+        li.textContent = item;
+
+        ingredientList.appendChild(li);
+
+    });
+
+
+    document
+    .getElementById(
+        "modalInstructions"
+    )
+    .textContent =
+        selectedRecipe.instructions;
+
+
+    document
+    .getElementById(
+        "ratingMessage"
+    )
+    .textContent = "";
+
+
+    document
+    .getElementById(
+        "recipeModal"
+    )
+    .style.display = "block";
+
+}
+
+
+/* ================= CLOSE MODAL ================= */
+
+function closeModal() {
+
+    document
+    .getElementById(
+        "recipeModal"
+    )
+    .style.display = "none";
+
+}
+
+
+window.onclick = function(event) {
+
+    let modal =
+        document.getElementById(
+            "recipeModal"
+        );
+
+
+    if (event.target === modal) {
+
+        modal.style.display = "none";
+
+    }
+
+};
+
+
+/* ================= FAVORITES ================= */
+
+let favorites = [];
+
+
+function toggleFavorite(id) {
+
+    if (favorites.includes(id)) {
+
+        favorites =
+            favorites.filter(
+                item => item !== id
+            );
+
+        alert(
+            "Recipe removed from favorites!"
+        );
+
+    } else {
+
+        favorites.push(id);
+
+        alert(
+            "Recipe added to favorites ❤️"
+        );
+
+    }
+
+
+    displayFavorites();
+
+}
+
+
+/* ================= DISPLAY FAVORITES ================= */
+
+function displayFavorites() {
+
+    let container =
+        document.getElementById(
+            "favoriteContainer"
+        );
+
+
+    container.innerHTML = "";
+
+
+    let favoriteRecipes =
+        recipes.filter(
+            recipe =>
+            favorites.includes(recipe.id)
+        );
+
+
+    if (favoriteRecipes.length === 0) {
+
+        container.innerHTML =
+        `<p class="empty">
+            ❤️ You haven't saved any recipes yet.
+        </p>`;
+
+        return;
+    }
+
+
+    favoriteRecipes.forEach(recipe => {
+
+        let card =
+            document.createElement("div");
+
+        card.className =
+            "recipe-card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${recipe.image}"
+                alt="${recipe.name}"
+            >
+
+            <div class="recipe-info">
+
+                <h3>
+                    ${recipe.name}
+                </h3>
+
+                <p class="cuisine">
+                    ${recipe.cuisine}
+                </p>
+
+                <div class="buttons">
+
+                    <button
+                        class="view-btn"
+                        onclick="openRecipe(${recipe.id})">
+
+                        📖 View
+
+                    </button>
+
+
+                    <button
+                        class="fav-btn"
+                        onclick="toggleFavorite(${recipe.id})">
+
+                        Remove ❤️
+
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= RATING ================= */
+
+function rate(number) {
+
+    if (!selectedRecipe) {
+
+        return;
+    }
+
+
+    document
+    .getElementById(
+        "ratingMessage"
+    )
+    .textContent =
+
+        "You rated " +
+        selectedRecipe.name +
+        " " +
+        number +
+        "/5 ⭐";
+
+}
+
+
+/* ================= ADD NEW RECIPE ================= */
+
+document
+.getElementById("recipeForm")
+.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        let newRecipe = {
+
+            id: Date.now(),
+
+            name:
+                document
+                .getElementById(
+                    "recipeName"
+                )
+                .value,
+
+            cuisine:
+                document
+                .getElementById(
+                    "recipeCuisine"
+                )
+                .value,
+
+            image:
+                document
+                .getElementById(
+                    "recipeImage"
+                )
+                .value,
+
+            ingredients:
+                document
+                .getElementById(
+                    "ingredients"
+                )
+                .value
+                .split(",")
+                .map(
+                    item =>
+                    item.trim()
+                ),
+
+            instructions:
+                document
+                .getElementById(
+                    "instructions"
+                )
+                .value
+        };
+
+
+        recipes.push(newRecipe);
+
+
+        displayRecipes();
+
+
+        this.reset();
+
+
+        alert(
+            "🎉 Recipe added successfully!"
+        );
+
+
+        document
+        .getElementById("recipes")
+        .scrollIntoView();
+
+    }
+);
+
+
+/* ================= INITIAL DISPLAY ================= */
+
+displayRecipes();
+
+displayFavorites();
+
+</script>
+
+
+</body>
+
+</html>
+``` 
